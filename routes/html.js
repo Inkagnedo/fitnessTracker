@@ -1,20 +1,12 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const workoutSchema = new Schema({
-  exercise: {
-    type: String,
-    name: String,
-    duration: Number,
-    weight: Number,
-    reps: Number,
-    sets: Number
-  },
-  day: {    
-    type: Date,
-    default: Date.now
-  }
-});
+const express = require('express');
+const app = express();
+const path = require('path');
 
-const workout = mongoose.model('workout', workoutSchema);
-
-module.exports = workout;
+module.exports = function(app) {
+    app.get('/stats', function (req, res) {
+        res.sendFile(path.join(`${__dirname}/../public/html/stats.html`));
+    })
+    app.get('/exercise', function (req, res) {
+        res.sendFile(path.join(`${__dirname}/../public/html/exercise.html`));
+    })
+};
